@@ -48,8 +48,6 @@ namespace project_d
         public override void Update()
         {
             base.Update();
-
-
         }
     }
 }

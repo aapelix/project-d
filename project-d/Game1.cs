@@ -10,12 +10,18 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
+    Texture2D spriteSheet;
+
+
     MouseState mState;
     KeyboardState kState;
 
     List<ScaledSprite> sprites;
 
-    Player player;
+    AnimationManager am;
+
+    int posX;
+    int posY;
 
     public Game1()
     {
@@ -37,14 +43,9 @@ public class Game1 : Game
 
         sprites = new List<ScaledSprite>();
 
-        Texture2D texture = Content.Load<Texture2D>("character");
-        Texture2D ground = Content.Load<Texture2D>("ground");
+        spriteSheet = Content.Load<Texture2D>("hoodieman");
 
-        sprites.Add(new ScaledSprite(ground, new Vector2(350, 400)));
-        sprites.Add(new ScaledSprite(ground, new Vector2(400, 400)));
-        sprites.Add(new ScaledSprite(ground, new Vector2(450, 400)));
-
-        player = new Player(texture, new Vector2(400, 0));
+        am = new(8, 1, 5, 3, new Vector2(192, 192));
     }
 
     protected override void Update(GameTime gameTime)
@@ -55,18 +56,22 @@ public class Game1 : Game
         kState = Keyboard.GetState();
         mState = Mouse.GetState();
 
+        if (Keyboard.GetState().IsKeyDown(Keys.Right))
+        {
+            posX += 5;
+        }
+
+        if (Keyboard.GetState().IsKeyDown(Keys.Left))
+        {
+            posX -= 5;
+        }
+
         foreach (ScaledSprite sprite in sprites)
         {
             sprite.Update();
-
-            if (sprite != player && sprite.Rect.Intersects(player.Rect))
-            {
-
-            }
         }
 
-        player.Update(gameTime, sprites);
-
+        am.Update();
         base.Update(gameTime);
     }
 
@@ -78,8 +83,7 @@ public class Game1 : Game
 
         foreach (ScaledSprite sprite in sprites)
             _spriteBatch.Draw(sprite.texture, sprite.pos, Color.White);
-
-        _spriteBatch.Draw(player.texture, player.Rect, Color.White);
+        _spriteBatch.Draw(spriteSheet, new Rectangle(posX, 100, 192, 192), am.GetFrame(), Color.White);
 
         _spriteBatch.End();
 

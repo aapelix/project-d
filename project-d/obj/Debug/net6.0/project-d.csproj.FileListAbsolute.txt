@@ -25,3 +25,5 @@ C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\obj\Debug\net6.0\project-d.g
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\obj\Debug\net6.0\ref\project-d.dll
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\character.xnb
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\ground.xnb
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\obj\Debug\net6.0\project-d.sourcelink.json
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\hoodieman.xnb
