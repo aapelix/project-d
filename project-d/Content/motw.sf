@@ -1,0 +1,29 @@
+{
+  "textureAtlas": {
+    "texture": "hoodieman.png",
+    "regionWidth": 192,
+    "regionHeight": 192
+  },
+  "cycles": {
+    "idle": {
+      "frames": [0,1],
+      "isLooping": false,
+      "frameDuration": 0.5
+    },
+    "run": {
+      "frames": [24,25,26,27,28,29,30,31],
+      "isLooping": false,
+      "frameDuration": 0.1
+    },
+    "jump": {
+      "frames": [40,41,42,43,44,45,46,47],
+      "isLooping": false,
+      "frameDuration": 0.1
+    },
+    "die": {
+      "frames": [48,49,50],
+      "isLooping": false,
+      "frameDuration": 0.2
+    }
+  }
+}

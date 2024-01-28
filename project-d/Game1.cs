@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,7 +13,6 @@ public class Game1 : Game
 
     Texture2D spriteSheet;
 
-
     MouseState mState;
     KeyboardState kState;
 
@@ -20,8 +20,18 @@ public class Game1 : Game
 
     AnimationManager am;
 
+    SpriteEffects s = SpriteEffects.FlipHorizontally;
+
     int posX;
-    int posY;
+    // int posY;
+
+    int animation = 0;
+    int animationFrames = 2;
+    int animationDuration = 10;
+    string animationState = "Idle";
+
+    bool isRunning;
+    bool isIdle = true;
 
     public Game1()
     {
@@ -45,7 +55,7 @@ public class Game1 : Game
 
         spriteSheet = Content.Load<Texture2D>("hoodieman");
 
-        am = new(8, 1, 5, 3, new Vector2(192, 192));
+        newAnimation();
     }
 
     protected override void Update(GameTime gameTime)
@@ -56,14 +66,41 @@ public class Game1 : Game
         kState = Keyboard.GetState();
         mState = Mouse.GetState();
 
-        if (Keyboard.GetState().IsKeyDown(Keys.Right))
+        if (!isRunning && Keyboard.GetState().IsKeyDown(Keys.Right))
         {
-            posX += 5;
+            animationState = "Running";
+            isRunning = true;
+            isIdle = false;
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.Left))
+        if (!isRunning && Keyboard.GetState().IsKeyDown(Keys.Left))
         {
-            posX -= 5;
+            animationState = "Running";
+            isRunning = true;
+            isIdle = false;
+        }
+
+        if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right) && isIdle == false)
+        {
+            animationState = "Idle";
+            isIdle = true;
+            isRunning = false;
+        }
+
+        switch (animationState)
+        {
+            case "Idle":
+                animation = 0;
+                animationFrames = 2;
+                animationDuration = 10;
+                newAnimation();
+                break;
+            case "Running":
+                animation = 3;
+                animationFrames = 8;
+                animationDuration = 5;
+                newAnimation();
+                break;
         }
 
         foreach (ScaledSprite sprite in sprites)
@@ -83,10 +120,15 @@ public class Game1 : Game
 
         foreach (ScaledSprite sprite in sprites)
             _spriteBatch.Draw(sprite.texture, sprite.pos, Color.White);
-        _spriteBatch.Draw(spriteSheet, new Rectangle(posX, 100, 192, 192), am.GetFrame(), Color.White);
+        _spriteBatch.Draw(spriteSheet, new Rectangle(posX, 100, 192, 192), am.GetFrame(), Color.White, 0, new Vector2(0, 0), s, 0);
 
         _spriteBatch.End();
 
         base.Draw(gameTime);
+    }
+
+    private void newAnimation()
+    {
+        am = new(animationFrames, 1, animationDuration, animation, new Vector2(192, 192));
     }
 }

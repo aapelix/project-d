@@ -37,8 +37,6 @@ namespace project_d
                 counter = 0;
                 NextFrame();
             }
-
-
         }
 
         private void NextFrame()

@@ -1,4 +1,1 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/character.png","C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/character.xnb","TextureProcessor","Texture2DContent",260,757,0,1744505
-"C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/ground.png","C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/ground.xnb","TextureProcessor","Texture2DContent",139,7141,0,00468
-"C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/hoodieman.png","C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/hoodieman.xnb","TextureProcessor","Texture2DContent",41217,10616917,0,2941299

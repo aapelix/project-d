@@ -4,13 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/character.png</File>
-    <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/ground.png</File>
     <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/hoodieman.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
