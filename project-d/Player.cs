@@ -28,13 +28,13 @@ namespace project_d
 
             pos.X += changeX;
 
-            foreach (var sprite in collisionGroup)
-            {
-                if (sprite.Rect.Intersects(Rect))
+                foreach (var sprite in collisionGroup)
                 {
-                    pos.X -= changeX;
+                    if (sprite.Rect.Intersects(Rect))
+                    {
+                        pos.X -= changeX;
+                    }
                 }
-            }
 
             foreach (var sprite in collisionGroup)
             {

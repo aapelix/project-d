@@ -1,1 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/incompiltedtileset.png","C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/Content/incompiltedtileset.xnb","TextureProcessor","Texture2DContent",4070,36949,0,1713049
+"C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/incompiltedtileset.tsx","C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/Content/incompiltedtileset.xnb","TiledMapTilesetProcessor","TiledMapTilesetContentItem",3949,1185,0,0606563

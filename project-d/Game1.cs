@@ -3,6 +3,15 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.ViewportAdapters;
+using MonoGame.Extended.Tiled;
+using MonoGame.Extended.Tiled.Renderers;
+using MonoGame.Extended.Sprites;
+using MonoGame.Extended.Serialization;
+using MonoGame.Extended.Content;
+using MonoGame.Extended.Collisions;
+using System;
 
 namespace project_d;
 
@@ -11,33 +20,39 @@ public class Game1 : Game
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
 
-    Texture2D spriteSheet;
-
     MouseState mState;
     KeyboardState kState;
 
-    List<ScaledSprite> sprites;
+    readonly int tileWidth;
 
-    AnimationManager am;
+    TiledMap _tiledMap;
+    TiledMapRenderer _tiledMapRenderer;
+
+    private AnimatedSprite _motwSprite;
+    private Vector2 _motwPosition;
+
+    private CollisionComponent _collisionHandler;
+
+    List<ScaledSprite> sprites;
 
     SpriteEffects s = SpriteEffects.FlipHorizontally;
 
-    int posX;
-    // int posY;
-
-    int animation = 0;
-    int animationFrames = 2;
-    int animationDuration = 10;
-    string animationState = "Idle";
-
-    bool isRunning;
-    bool isIdle = true;
+    private OrthographicCamera _camera;
 
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
+
+        if (GraphicsDevice == null)
+        {
+            _graphics.ApplyChanges();
+        }
+
+        _graphics.PreferredBackBufferWidth = GraphicsDevice.Adapter.CurrentDisplayMode.Width;
+        _graphics.PreferredBackBufferHeight = GraphicsDevice.Adapter.CurrentDisplayMode.Height;
+        _graphics.ApplyChanges();
     }
 
     protected override void Initialize()
@@ -45,17 +60,25 @@ public class Game1 : Game
         // TODO: Add your initialization logic here
 
         base.Initialize();
+
+        var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+        _camera = new OrthographicCamera(viewportAdapter);
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
         sprites = new List<ScaledSprite>();
 
-        spriteSheet = Content.Load<Texture2D>("hoodieman");
+        _tiledMap = Content.Load<TiledMap>("tiledmap");
+        _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
 
-        newAnimation();
+        var spriteSheet = Content.Load<SpriteSheet>("hoodieman.sf", new JsonContentLoader());
+        var sprite = new AnimatedSprite(spriteSheet);
+
+        sprite.Play("idle");
+        _motwPosition = new Vector2(0, 0);
+        _motwSprite = sprite;
     }
 
     protected override void Update(GameTime gameTime)
@@ -66,49 +89,68 @@ public class Game1 : Game
         kState = Keyboard.GetState();
         mState = Mouse.GetState();
 
-        if (!isRunning && Keyboard.GetState().IsKeyDown(Keys.Right))
+        var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        var walkSpeed = deltaSeconds * 128;
+        var keyboardState = Keyboard.GetState();
+        var animation = "idle";
+        float changeX = 0;
+
+        if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
         {
-            animationState = "Running";
-            isRunning = true;
-            isIdle = false;
+            animation = "run";
+            changeX -= walkSpeed;
         }
 
-        if (!isRunning && Keyboard.GetState().IsKeyDown(Keys.Left))
+        if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
         {
-            animationState = "Running";
-            isRunning = true;
-            isIdle = false;
+            animation = "run";
+            changeX += walkSpeed;
         }
 
-        if (Keyboard.GetState().IsKeyUp(Keys.Left) && Keyboard.GetState().IsKeyUp(Keys.Right) && isIdle == false)
+        if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
         {
-            animationState = "Idle";
-            isIdle = true;
-            isRunning = false;
+            animation = "run";
+            _motwPosition.Y += 1;
         }
 
-        switch (animationState)
+        if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
         {
-            case "Idle":
-                animation = 0;
-                animationFrames = 2;
-                animationDuration = 10;
-                newAnimation();
-                break;
-            case "Running":
-                animation = 3;
-                animationFrames = 8;
-                animationDuration = 5;
-                newAnimation();
-                break;
+            animation = "run";
+            _motwPosition.Y -= 1;
         }
+
+        _motwPosition.X += changeX;
+
+        var TileX = _motwPosition.X / 16;
+        var TileY = _motwPosition.Y / 16;
+
+        var tile = _tiledMap.TileLayers[2].GetTile((ushort)TileX, (ushort)TileY);
+
+        if (tile.X != 0 && tile.Y != 0)
+            Debug.WriteLine(tile.X + " " + tile.Y);
+
+
+
+
+
+
+        _motwSprite.Play(animation);
+
+        if (keyboardState.IsKeyDown(Keys.R))
+            _camera.ZoomIn(deltaSeconds);
+
+        if (keyboardState.IsKeyDown(Keys.F))
+            _camera.ZoomOut(deltaSeconds);
+
+        _motwSprite.Update(deltaSeconds);
 
         foreach (ScaledSprite sprite in sprites)
         {
             sprite.Update();
         }
 
-        am.Update();
+        _tiledMapRenderer.Update(gameTime);
+
         base.Update(gameTime);
     }
 
@@ -116,19 +158,18 @@ public class Game1 : Game
     {
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
-        _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+        var transformMatrix = _camera.GetViewMatrix();
+        _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
 
         foreach (ScaledSprite sprite in sprites)
             _spriteBatch.Draw(sprite.texture, sprite.pos, Color.White);
-        _spriteBatch.Draw(spriteSheet, new Rectangle(posX, 100, 192, 192), am.GetFrame(), Color.White, 0, new Vector2(0, 0), s, 0);
+
+        _spriteBatch.Draw(_motwSprite, _motwPosition);
+
+        _tiledMapRenderer.Draw();
 
         _spriteBatch.End();
 
         base.Draw(gameTime);
-    }
-
-    private void newAnimation()
-    {
-        am = new(animationFrames, 1, animationDuration, animation, new Vector2(192, 192));
     }
 }

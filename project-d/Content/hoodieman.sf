@@ -7,12 +7,12 @@
   "cycles": {
     "idle": {
       "frames": [0,1],
-      "isLooping": false,
-      "frameDuration": 0.5
+      "isLooping": true,
+      "frameDuration": 0.3999999
     },
     "run": {
       "frames": [24,25,26,27,28,29,30,31],
-      "isLooping": false,
+      "isLooping": true,
       "frameDuration": 0.1
     },
     "jump": {
@@ -21,9 +21,9 @@
       "frameDuration": 0.1
     },
     "die": {
-      "frames": [48,49,50],
+      "frames": [56,57,58,59,60,61,62,63],
       "isLooping": false,
-      "frameDuration": 0.2
+      "frameDuration": 0.1
     }
   }
 }

@@ -26,7 +26,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/lithiumtoast/api/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -47,6 +48,26 @@
             "MonoGame.Content.Builder.Task": {
               "target": "Package",
               "version": "[3.8.1.303, )"
+            },
+            "MonoGame.Extended": {
+              "target": "Package",
+              "version": "[3.9.0-alpha0093, )"
+            },
+            "MonoGame.Extended.Collisions": {
+              "target": "Package",
+              "version": "[3.9.0-alpha0093, )"
+            },
+            "MonoGame.Extended.Content.Pipeline": {
+              "target": "Package",
+              "version": "[3.9.0-alpha0093, )"
+            },
+            "MonoGame.Extended.Input": {
+              "target": "Package",
+              "version": "[3.9.0-alpha0093, )"
+            },
+            "MonoGame.Extended.Tiled": {
+              "target": "Package",
+              "version": "[3.9.0-alpha0093, )"
             },
             "MonoGame.Framework.DesktopGL": {
               "target": "Package",

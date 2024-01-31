@@ -24,5 +24,15 @@ C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\obj\Debug\net6.0\project-d.p
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\obj\Debug\net6.0\project-d.genruntimeconfig.cache
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\obj\Debug\net6.0\ref\project-d.dll
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\obj\Debug\net6.0\project-d.sourcelink.json
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\MonoGame.Extended.dll
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Autofac.dll
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\MonoGame.Extended.Collisions.dll
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\MonoGame.Extended.Graphics.dll
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\MonoGame.Extended.Tiled.dll
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\MonoGame.Extended.Input.dll
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\incompiltedtileset.xnb
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\incompiltedtileset_0.xnb
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\tiledmap.xnb
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\hoodieman.sf
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\hoodieman.xnb
-C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\motw.sf

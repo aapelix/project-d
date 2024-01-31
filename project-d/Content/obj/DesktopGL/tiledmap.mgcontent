@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/tiledmap.tmx</SourceFile>
+  <SourceTime>2024-01-30T16:12:25.0253579+02:00</SourceTime>
+  <DestFile>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/tiledmap.xnb</DestFile>
+  <DestTime>2024-01-30T16:44:26.8711442+02:00</DestTime>
+  <Importer>TiledMapImporter</Importer>
+  <ImporterTime>2023-03-19T13:04:28+02:00</ImporterTime>
+  <Processor>TiledMapProcessor</Processor>
+  <ProcessorTime>2023-03-19T13:04:28+02:00</ProcessorTime>
+  <Dependencies />
+  <BuildAsset>
+    <string>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/incompiltedtileset.xnb</string>
+  </BuildAsset>
+  <BuildOutput />
+</PipelineBuildEvent>

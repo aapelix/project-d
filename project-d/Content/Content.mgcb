@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:C:\Users\Aaro\.nuget\packages\monogame.extended.content.pipeline\3.9.0-alpha0093\tools\MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -24,4 +25,26 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:hoodieman.png
+
+#begin incompiltedtileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:incompiltedtileset.png
+
+#begin incompiltedtileset.tsx
+/importer:TiledMapTilesetImporter
+/processor:TiledMapTilesetProcessor
+/build:incompiltedtileset.tsx
+
+#begin tiledmap.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:tiledmap.tmx
 
