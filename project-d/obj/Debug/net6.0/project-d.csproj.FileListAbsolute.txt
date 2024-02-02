@@ -34,5 +34,5 @@ C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\MonoGame.Ex
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\incompiltedtileset.xnb
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\incompiltedtileset_0.xnb
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\tiledmap.xnb
-C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\hoodieman.sf
-C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\hoodieman.xnb
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\spritesheet.xnb
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\spritesheet.sf

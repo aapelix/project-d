@@ -10,8 +10,6 @@ using MonoGame.Extended.Tiled.Renderers;
 using MonoGame.Extended.Sprites;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Content;
-using MonoGame.Extended.Collisions;
-using System;
 
 namespace project_d;
 
@@ -23,19 +21,11 @@ public class Game1 : Game
     MouseState mState;
     KeyboardState kState;
 
-    readonly int tileWidth;
-
     TiledMap _tiledMap;
     TiledMapRenderer _tiledMapRenderer;
 
     private AnimatedSprite _motwSprite;
     private Vector2 _motwPosition;
-
-    private CollisionComponent _collisionHandler;
-
-    List<ScaledSprite> sprites;
-
-    SpriteEffects s = SpriteEffects.FlipHorizontally;
 
     private OrthographicCamera _camera;
 
@@ -68,16 +58,15 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        sprites = new List<ScaledSprite>();
 
         _tiledMap = Content.Load<TiledMap>("tiledmap");
         _tiledMapRenderer = new TiledMapRenderer(GraphicsDevice, _tiledMap);
 
-        var spriteSheet = Content.Load<SpriteSheet>("hoodieman.sf", new JsonContentLoader());
+        var spriteSheet = Content.Load<SpriteSheet>("spritesheet.sf", new JsonContentLoader());
         var sprite = new AnimatedSprite(spriteSheet);
 
         sprite.Play("idle");
-        _motwPosition = new Vector2(0, 0);
+        _motwPosition = new Vector2(100, 10);
         _motwSprite = sprite;
     }
 
@@ -90,47 +79,72 @@ public class Game1 : Game
         mState = Mouse.GetState();
 
         var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-        var walkSpeed = deltaSeconds * 128;
+
+        var walkSpeed = deltaSeconds * 256;
+        var gravity = deltaSeconds * 200;
+
         var keyboardState = Keyboard.GetState();
         var animation = "idle";
         float changeX = 0;
+        float changeY = 0;
 
-        if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
+        if (kState.IsKeyDown(Keys.A))
         {
-            animation = "run";
+            animation = "run2";
             changeX -= walkSpeed;
         }
 
-        if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
+        if (kState.IsKeyDown(Keys.D))
         {
             animation = "run";
             changeX += walkSpeed;
         }
 
-        if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
+        if (kState.IsKeyDown(Keys.S))
         {
-            animation = "run";
-            _motwPosition.Y += 1;
+            changeY += walkSpeed;
         }
 
-        if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
+        if (kState.IsKeyDown(Keys.W))
         {
-            animation = "run";
-            _motwPosition.Y -= 1;
+            changeY -= walkSpeed;
         }
 
         _motwPosition.X += changeX;
+        _motwPosition.Y += changeY;
 
-        var TileX = _motwPosition.X / 16;
-        var TileY = _motwPosition.Y / 16;
+        // Collision
 
-        var tile = _tiledMap.TileLayers[2].GetTile((ushort)TileX, (ushort)TileY);
+        var tileWidth = 16;
+        var TileX = _motwPosition.X / tileWidth;
+        var TileY = _motwPosition.Y / tileWidth;
+
+        var tile = _tiledMap.TileLayers[1].GetTile((ushort)TileX, (ushort)TileY);
+
+        if (tile.X == 0 && tile.Y == 0)
+        {
+            TileX = (_motwPosition.X + 32) / tileWidth;
+            tile = _tiledMap.TileLayers[1].GetTile((ushort)TileX, (ushort)TileY);
+
+            if (tile.X == 0 && tile.Y == 0)
+            {
+                TileX = _motwPosition.X / tileWidth;
+                TileY = (_motwPosition.Y + 40) / tileWidth;
+                tile = _tiledMap.TileLayers[1].GetTile((ushort)TileX, (ushort)TileY);
+
+                if (tile.X == 0 && tile.Y == 0)
+                {
+                    TileX = (_motwPosition.X + 32) / tileWidth;
+                    tile = _tiledMap.TileLayers[1].GetTile((ushort)TileX, (ushort)TileY);
+                }
+            }
+        }
 
         if (tile.X != 0 && tile.Y != 0)
-            Debug.WriteLine(tile.X + " " + tile.Y);
-
-
-
+        {
+            _motwPosition.X -= changeX;
+            _motwPosition.Y -= changeY;
+        }
 
 
 
@@ -143,14 +157,7 @@ public class Game1 : Game
             _camera.ZoomOut(deltaSeconds);
 
         _motwSprite.Update(deltaSeconds);
-
-        foreach (ScaledSprite sprite in sprites)
-        {
-            sprite.Update();
-        }
-
         _tiledMapRenderer.Update(gameTime);
-
         base.Update(gameTime);
     }
 
@@ -161,11 +168,7 @@ public class Game1 : Game
         var transformMatrix = _camera.GetViewMatrix();
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
 
-        foreach (ScaledSprite sprite in sprites)
-            _spriteBatch.Draw(sprite.texture, sprite.pos, Color.White);
-
-        _spriteBatch.Draw(_motwSprite, _motwPosition);
-
+        _spriteBatch.Draw(_motwSprite, _motwPosition, 0, new Vector2(5, 5));
         _tiledMapRenderer.Draw();
 
         _spriteBatch.End();

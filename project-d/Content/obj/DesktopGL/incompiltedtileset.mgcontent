@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/incompiltedtileset.tsx</SourceFile>
-  <SourceTime>2024-01-30T16:11:07.0534157+02:00</SourceTime>
+  <SourceTime>2024-01-31T17:33:22.2273982+02:00</SourceTime>
   <DestFile>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/bin/DesktopGL/incompiltedtileset.xnb</DestFile>
-  <DestTime>2024-01-30T16:44:26.7773612+02:00</DestTime>
+  <DestTime>2024-02-02T19:03:06.1327797+02:00</DestTime>
   <Importer>TiledMapTilesetImporter</Importer>
   <ImporterTime>2023-03-19T13:04:28+02:00</ImporterTime>
   <Processor>TiledMapTilesetProcessor</Processor>
