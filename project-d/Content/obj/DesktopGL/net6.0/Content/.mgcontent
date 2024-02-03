@@ -4,12 +4,14 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/ball.png</File>
     <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/incompiltedtileset.png</File>
     <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/incompiltedtileset.tsx</File>
     <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/spritesheet.png</File>
     <File>C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content/tiledmap.tmx</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

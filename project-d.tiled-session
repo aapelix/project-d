@@ -4,25 +4,33 @@
         "width": 2
     },
     "activeFile": "project-d/Content/tiledmap.tmx",
+    "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "project-d/bin/Debug/net6.0",
-        ".",
-        "project-d/bin/Debug/net6.0/Content",
         "project-d/Content",
-        "project-d/bin/Debug",
-        "project-d"
+        "project-d/Content/Rules",
+        "project-d",
+        ".",
+        "project-d/bin/Debug/net6.0/Content"
     ],
     "fileStates": {
+        "project-d/Content/Rules/autotilerules.tmx": {
+            "scale": 4,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 194.25,
+                "y": 222.25
+            }
+        },
         "project-d/Content/incompiltedtileset.tsx": {
             "scaleInDock": 1.5,
-            "scaleInEditor": 1
+            "scaleInEditor": 2
         },
         "project-d/Content/tiledmap.tmx": {
             "scale": 1,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 309,
-                "y": 142
+                "x": 655,
+                "y": 325
             }
         }
     },
@@ -30,17 +38,20 @@
     "last.imagePath": "C:/Users/Aaro/Desktop/Koodailut/project-d/project-d/Content",
     "map.height": 100,
     "map.lastUsedExportFilter": "Tiled map files (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "map.width": 100,
     "openFiles": [
         "project-d/Content/incompiltedtileset.tsx",
-        "project-d/Content/tiledmap.tmx"
+        "project-d/Content/tiledmap.tmx",
+        "project-d/Content/Rules/autotilerules.tmx"
     ],
     "project": "project-d.tiled-project",
-    "property.type": "string",
+    "property.type": "int",
     "recentFiles": [
         "project-d/Content/incompiltedtileset.tsx",
+        "project-d/Content/Rules/autotilerules.tmx",
         "project-d/Content/tiledmap.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",

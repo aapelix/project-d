@@ -35,16 +35,29 @@
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 16,16 0,16 0,0"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="7">
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="16">
+    <polygon points="0,0 16,-16 16,0"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="8">
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="8" width="16" height="8"/>
+  </objectgroup>
  </tile>
  <tile id="9">
   <properties>
@@ -90,6 +103,9 @@
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="9" width="15" height="7"/>
+  </objectgroup>
  </tile>
  <tile id="18">
   <properties>
@@ -115,26 +131,49 @@
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 15.9375,7.75 15.9375,15.875 0.125,15.9375"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="23">
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="7.875">
+    <polygon points="0,0 16,8.125 0,8.125"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="24">
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="15.9375" y="8">
+    <polygon points="0,0 -15.9375,8 0.0625,8"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="25">
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="16" y="0">
+    <polygon points="0,0 -15.9375,7.125 -15.9375,15.875 0.125,16"/>
+   </object>
+  </objectgroup>
  </tile>
  <tile id="26">
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="1" y="13" width="10" height="3"/>
+  </objectgroup>
  </tile>
  <tile id="27">
   <properties>
@@ -180,5 +219,8 @@
   <properties>
    <property name="Blocks" value="true"/>
   </properties>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="8" y="12" width="6" height="4"/>
+  </objectgroup>
  </tile>
 </tileset>

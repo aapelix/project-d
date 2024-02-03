@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -21,11 +20,16 @@ public class Game1 : Game
     MouseState mState;
     KeyboardState kState;
 
+    int spawnX = 0;
+    int spawnY = 0;
+
     TiledMap _tiledMap;
     TiledMapRenderer _tiledMapRenderer;
 
     private AnimatedSprite _motwSprite;
     private Vector2 _motwPosition;
+
+    bool hasJumped;
 
     private OrthographicCamera _camera;
 
@@ -51,7 +55,7 @@ public class Game1 : Game
 
         base.Initialize();
 
-        var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
+        var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, _graphics.PreferredBackBufferWidth / 3, _graphics.PreferredBackBufferHeight / 3);
         _camera = new OrthographicCamera(viewportAdapter);
     }
 
@@ -66,7 +70,19 @@ public class Game1 : Game
         var sprite = new AnimatedSprite(spriteSheet);
 
         sprite.Play("idle");
-        _motwPosition = new Vector2(100, 10);
+
+        foreach (var item in _tiledMap.Properties)
+        {
+            if (item.Key == "spawnX")
+                spawnX = int.Parse(item.Value) * 16;
+            if (item.Key == "spawnY")
+                spawnY = int.Parse(item.Value) * 16;
+        }
+
+        Debug.WriteLine(spawnX);
+        Debug.WriteLine(spawnY);
+
+        _motwPosition = new Vector2(spawnX, spawnY);
         _motwSprite = sprite;
     }
 
@@ -80,7 +96,7 @@ public class Game1 : Game
 
         var deltaSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-        var walkSpeed = deltaSeconds * 256;
+        var walkSpeed = deltaSeconds * 300;
         var gravity = deltaSeconds * 200;
 
         var keyboardState = Keyboard.GetState();
@@ -100,18 +116,24 @@ public class Game1 : Game
             changeX += walkSpeed;
         }
 
-        if (kState.IsKeyDown(Keys.S))
+        if (kState.IsKeyDown(Keys.T))
+            _motwPosition = new Vector2(spawnX, spawnY);
+
+        if (kState.IsKeyDown(Keys.Space) && !hasJumped)
         {
-            changeY += walkSpeed;
+            animation = "jump";
+            hasJumped = true;
         }
 
-        if (kState.IsKeyDown(Keys.W))
-        {
-            changeY -= walkSpeed;
-        }
 
         _motwPosition.X += changeX;
         _motwPosition.Y += changeY;
+
+        if (_motwPosition.X <= 1 || _motwPosition.Y <= 1)
+        {
+            _motwPosition.X -= changeX;
+            _motwPosition.Y -= changeY;
+        }
 
         // Collision
 
@@ -129,35 +151,34 @@ public class Game1 : Game
             if (tile.X == 0 && tile.Y == 0)
             {
                 TileX = _motwPosition.X / tileWidth;
-                TileY = (_motwPosition.Y + 40) / tileWidth;
+                TileY = (_motwPosition.Y + 20) / tileWidth;
                 tile = _tiledMap.TileLayers[1].GetTile((ushort)TileX, (ushort)TileY);
 
                 if (tile.X == 0 && tile.Y == 0)
                 {
                     TileX = (_motwPosition.X + 32) / tileWidth;
                     tile = _tiledMap.TileLayers[1].GetTile((ushort)TileX, (ushort)TileY);
+
+                    if (tile.X == 0 && tile.Y == 0 && !hasJumped)
+                        _motwPosition.Y += 5;
                 }
             }
         }
 
-        if (tile.X != 0 && tile.Y != 0)
+        else if (tile.X != 0 && tile.Y != 0)
         {
             _motwPosition.X -= changeX;
             _motwPosition.Y -= changeY;
+            hasJumped = false;
         }
-
-
 
         _motwSprite.Play(animation);
 
-        if (keyboardState.IsKeyDown(Keys.R))
-            _camera.ZoomIn(deltaSeconds);
-
-        if (keyboardState.IsKeyDown(Keys.F))
-            _camera.ZoomOut(deltaSeconds);
+        _camera.LookAt(_motwPosition);
 
         _motwSprite.Update(deltaSeconds);
         _tiledMapRenderer.Update(gameTime);
+
         base.Update(gameTime);
     }
 
@@ -168,8 +189,11 @@ public class Game1 : Game
         var transformMatrix = _camera.GetViewMatrix();
         _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: transformMatrix);
 
-        _spriteBatch.Draw(_motwSprite, _motwPosition, 0, new Vector2(5, 5));
-        _tiledMapRenderer.Draw();
+        _spriteBatch.Draw(_motwSprite, _motwPosition, 0, new Vector2(2, 2));
+
+        _spriteBatch.DrawLine(_motwPosition, new Vector2(_motwPosition.X + 32, _motwPosition.Y + 20), Color.White);
+
+        _tiledMapRenderer.Draw(_tiledMap.GetLayer("terrain"), transformMatrix);
 
         _spriteBatch.End();
 

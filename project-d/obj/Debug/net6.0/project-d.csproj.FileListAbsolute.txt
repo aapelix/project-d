@@ -36,3 +36,4 @@ C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\inc
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\tiledmap.xnb
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\spritesheet.xnb
 C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\spritesheet.sf
+C:\Users\Aaro\Desktop\Koodailut\project-d\project-d\bin\Debug\net6.0\Content\ball.xnb

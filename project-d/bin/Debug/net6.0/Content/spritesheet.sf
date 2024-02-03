@@ -24,6 +24,11 @@
       "frames": [18,19,20,21,22,23],
       "isLooping": true,
       "frameDuration": 0.1
+    },
+    "jump": {
+      "frames": [24,25,26,27,28],
+      "isLooping": false,
+      "frameDuration": 0.1
     }
   }
 }
